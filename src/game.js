@@ -185,8 +185,6 @@ function paint(pointer) {
             thread_size[colorIndex] -= 2;
         }
     }
-
-    console.log();
 }
 
 var preload = {
@@ -238,7 +236,6 @@ var stitching = {
 
         resetData();
 
-        createUI();
         createDrawingArea();
         createEventListeners();
 
