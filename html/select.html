@@ -25,8 +25,8 @@
     const next = () => alert('selected threads ' + selectedThreads + ' and patch ' + selectedPatch);
 
     const checkIfReady = () => {
-     const button = document.getElementById('btn-continue');
-      if(selectedThreads.length === 4 && selectedPatch) {
+      const button = document.getElementById('btn-continue');
+      if (selectedThreads.length === 4 && selectedPatch) {
         button.classList.remove('disabled');
         console.log('ready')
       } else {
@@ -116,6 +116,7 @@
 
         if (selectedPatch) {
           document.getElementById("slider-controls").classList.add('hidden');
+          document.getElementById("btn-patch-" + patch).innerHTML = 'selected patch ' + selectedPatch;
         }
       } else {
         selectedPatch = null;
@@ -123,6 +124,7 @@
 
         if (!selectedPatch) {
           document.getElementById("slider-controls").classList.remove('hidden');
+          document.getElementById("btn-patch-" + patch).innerHTML = 'select patch ' + patch;
         }
       }
 
@@ -137,7 +139,7 @@
     <main class="select-screen">
       <header>
         <a class="nes-btn" href="index.html">&lt; back</a>
-        <span class="nes-text is-success home-title">Select a patch and color threads</span>
+        <span class="nes-text is-success home-title">Select a patch and 4 threads</span>
         <button id="btn-continue" class="nes-btn disabled" onclick="next();">continue ></button>
       </header>
       <section>
@@ -152,39 +154,39 @@
             <div class=inner>
               <article id="patch-1">
                 <div class="info">
-                  <button class="nes-btn" onclick="toggleSelectPatch('1')">Select patch</button>
+                  <button class="nes-btn" id="btn-patch-1" onclick="toggleSelectPatch('1')">Select patch 1</button>
                 </div>
                 <img src="https://placekitten.com/300/300" alt="kitten">
               </article>
 
               <article id="patch-2">
                 <div class="info">
-                  <button class="nes-btn" onclick="toggleSelectPatch('2')">Select patch</button>
+                  <button class="nes-btn" id="btn-patch-2" onclick="toggleSelectPatch('2')">Select patch 2</button>
                 </div>
                 <img src="https://placekitten.com/300/300" alt="kitten">
               </article>
 
-              <articl id="patch-3">
+              <article id="patch-3">
                 <div class="info">
-                  <button class="nes-btn" onclick="toggleSelectPatch('3')">Select patch</button>
+                  <button class="nes-btn" id="btn-patch-3" onclick="toggleSelectPatch('3')">Select patch 3</button>
                 </div>
                 <img src="https://placekitten.com/300/300" alt="kitten">
 
-                </article>
+              </article>
 
-                <article id="patch-4">
-                  <div class="info">
-                    <button class="nes-btn" onclick="toggleSelectPatch('4')">Select patch</button>
-                  </div>
-                  <img src="https://placekitten.com/300/300" alt="kitten">
-                </article>
+              <article id="patch-4">
+                <div class="info">
+                  <button class="nes-btn" id="btn-patch-4" onclick="toggleSelectPatch('4')">Select patch 4</button>
+                </div>
+                <img src="https://placekitten.com/300/300" alt="kitten">
+              </article>
 
-                <article id="patch-5">
-                  <div class="info">
-                    <button class="nes-btn" onclick="toggleSelectPatch('5')">Select patch</button>
-                  </div>
-                  <img src="https://placekitten.com/300/300" alt="kitten">
-                </article>
+              <article id="patch-5">
+                <div class="info">
+                  <button class="nes-btn" id="btn-patch-5" onclick="toggleSelectPatch('5')">Select patch 5</button>
+                </div>
+                <img src="https://placekitten.com/300/300" alt="kitten">
+              </article>
             </div>
             <!-- .inner -->
           </div>
