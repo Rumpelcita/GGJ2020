@@ -6,9 +6,14 @@ var game = new Phaser.Game(768, 768, Phaser.CANVAS, 'game-container');
 game.state.add('stitching', stitching);
 game.state.add('patching_preload', patching_preload);
 game.state.add('patching', patching);
+game.state.add('parameters', {preload: parameters, update: startStitching});
+
+const parameters = () => { threads = selectedThreads; patch = selectedPatch };
+const startStitching = () => { game.state.start('stitching'); };
 
 const initializePaserGame = () => {
-  game.state.start('stitching');
+  game.state.start('parameters');
+
   return
 };
 
