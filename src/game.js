@@ -30,6 +30,7 @@ var pmap = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
 var preview;
 var previewBG;
 var data;
+var bitmapData;
 
 
 function resetData() {
@@ -50,7 +51,15 @@ function resetData() {
 }
 
 function dataToBitmap() {
-    
+    var bitmapData = [];
+    var x;
+
+    for (var y = 0; y < data.length; y++) {
+        x = data[y].join('');
+        bitmapData.push(x);
+    }
+
+    console.log(bitmapData);
 }
 
 
@@ -67,7 +76,21 @@ function createUI() {
         '  22  '
     ];
 
+    var disk = [
+        'DDDDDDDDDD',
+        'DED1111DED',
+        'DED1111DDD',
+        'DEDDDDDDED',
+        'DEEEEEEEED',
+        'DEFFFFFFED',
+        'DEFF222FED',
+        'DEFF222FED',
+        'DEFF222FED',
+        'DDDDDDDDDD'
+    ];
+
     game.create.texture('arrow', arrow, 2);
+    game.create.texture('save', disk, 4);
 
     ui = game.make.bitmapData(800, 32);
 
@@ -78,6 +101,11 @@ function createUI() {
     var style = { font: "20px Courier", fill: "#fff", tabs: 80 };
 
     paletteArrow = game.add.sprite(8, 36, 'arrow');
+
+    saveIcon = game.add.sprite(600, 550, 'save');
+    saveIcon.inputEnabled = true;
+    saveIcon.input.useHandCursor = true;
+    saveIcon.events.onInputDown.add(dataToBitmap, this);
 }
 
 function createDrawingArea() {
@@ -109,7 +137,7 @@ function refresh() {
         for (var x = 0; x < spriteWidth; x++) {
             var i = data[y][x];
 
-            if (i !== '.' && i !== ' ') {
+            if (i !== ' ') {
                 color = game.create.palettes[palette][i];
                 canvas.rect(x * canvasZoom, y * canvasZoom, canvasZoom, canvasZoom, color);
             }
@@ -262,6 +290,4 @@ function paint(pointer) {
         canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
         canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
     }
-
-    console.log(data);
 }
