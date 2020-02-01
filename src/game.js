@@ -236,7 +236,6 @@ var stitching = {
 
         resetData();
 
-        createUI();
         createDrawingArea();
         createEventListeners();
 
