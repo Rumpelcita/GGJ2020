@@ -1,10 +1,22 @@
 const allThreads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 let selectedThreads = [];
 let selectedPatch;
+var game = new Phaser.Game(768, 768, Phaser.CANVAS, 'game-container');
+
+game.state.add('stitching', stitching);
+game.state.add('patching_preload', patching_preload);
+game.state.add('patching', patching);
+
+const initializePaserGame = () => {
+  game.state.start('stitching');
+  return
+};
 
 const next = () => {
   console.log('selected threads ' + selectedThreads + ' and patch ' + selectedPatch);
-  window.location.href = 'game.html';
+  document.getElementById('main-container').classList.add('hidden');
+  document.getElementById('game-container').classList.remove('hidden');
+  initializePaserGame();
 };
 
 const checkIfReady = () => {

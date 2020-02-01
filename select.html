@@ -17,11 +17,13 @@
   <link rel='stylesheet' type='text/css' media='screen' href='css/slider.css'>
 
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="lib/phaser.min.js"></script>
+  <script type="text/javascript" src="src/game.js"></script>
   <script type="text/javascript" src="scripts/select.js"> </script>
 </head>
 
 <body>
-  <div class="main-game-container nes-container">
+  <div id="main-container" class="main-game-container nes-container">
     <main class="select-screen">
       <header>
         <a class="nes-btn" href="index.html">back &lt;</a>
@@ -117,6 +119,7 @@
       </footer>
     </main>
   </div>
+  <div id="game-container" class="hidden"></div>
 </body>
 
 </html>
