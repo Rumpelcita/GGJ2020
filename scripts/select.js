@@ -18,7 +18,9 @@ const initializePaserGame = () => {
 };
 
 const next = () => {
-  console.log('selected threads ' + selectedThreads + ' and patch ' + selectedPatch);
+  console.log('selected threads')
+  console.log(selectedThreads)
+  console.log('and patch ' + selectedPatch);
   document.getElementById('main-container').classList.add('hidden');
   document.getElementById('game-container').classList.remove('hidden');
   initializePaserGame();
@@ -27,7 +29,7 @@ const next = () => {
 const checkIfReady = () => {
   const button = document.getElementById('btn-continue');
 
-  if (selectedThreads.length === 4 && selectedPatch) {
+  if (!checkAmmounts() && selectedPatch) {
     button.classList.remove('disabled');
     console.log('ready')
   } else {
@@ -39,12 +41,22 @@ const checkIfReady = () => {
   return
 }
 
-const find = (arr, number) => arr.find(element => element === number);
+checkAmmounts = () => {
+  let ammount = 0;
+
+  selectedThreads.forEach(function (arrayItem) {
+    ammount = arrayItem.ammount + ammount;
+  });
+  // console.log(ammount < 4)
+
+  return ammount < 4
+}
+
+const find = (arr, obj) => arr.find(element => element.color === obj.color);
 
 const greyOutThreads = () => allThreads.forEach(
   (thread) => {
     if (!find(selectedThreads, thread)) {
-      // console.log('greyout ' + thread)
       document.getElementById('btn-' + thread).classList.add('disabled');
     }
     return
@@ -60,56 +72,87 @@ const greyInThreads = () => allThreads.forEach(
   }
 );
 
-const toggleSelectThread = (number) => {
+const deselectThread = (colorCode) => {
+
+  const colorObj = find(selectedThreads, {color: colorCode});
+  colorObj.ammount = colorObj.ammount - 1;
+
+  if(colorObj.ammount == 0){
+    document.getElementById("btn-" + colorCode + '-selected').classList.add('hidden');
+    const index = selectedThreads.indexOf(colorObj);
+
+    if (index > -1) {
+      selectedThreads.splice(index, 1);
+    }
+  } else {
+    document.getElementById("btn-" + colorCode + '-selected').innerHTML = colorObj.ammount;
+  };
+
+  console.log(selectedThreads)
+  if (checkAmmounts()) {
+    greyInThreads();
+  };
+}
+
+const selectThread = (colorCode) => {
   //limit ammount of threads here
 
   checkIfReady();
-  if (selectedThreads.length < 4) {
-    if (find(selectedThreads, number)) {
-      document.getElementById("btn-" + number).classList.remove('active');
-      const index = selectedThreads.indexOf(number);
-      if (index > -1) {
-        selectedThreads.splice(index, 1);
+
+  if (checkAmmounts()) {
+    let colorObj = { color: colorCode };
+
+    if (find(selectedThreads, colorObj)) {
+      colorObj = find(selectedThreads, colorObj);
+      console.log( find(selectedThreads, colorObj))
+      colorObj.ammount = colorObj.ammount + 1;
+      document.getElementById("btn-" + colorCode + '-selected').innerHTML = colorObj.ammount;
+
+      if (!checkAmmounts()) {
+        greyOutThreads();
       }
 
-      if (selectedThreads.length < 4) {
-        greyInThreads();
-      };
-
       checkIfReady();
-      console.log('deselected ' + number)
-      console.log('threads selected ' + selectedThreads)
+      console.log('selected ' + colorCode)
+      console.log('threads selected ')
+      console.log(selectedThreads)
 
     } else {
-      document.getElementById("btn-" + number).classList.add('active');
-      selectedThreads.push(number);
+      document.getElementById("btn-" + colorCode + '-selected').classList.remove('hidden');
+      colorObj.ammount = 1;
+      document.getElementById("btn-" + colorCode + '-selected').innerHTML = colorObj.ammount;
 
-      if (selectedThreads.length == 4) {
-        greyOutThreads()
+      selectedThreads.push(colorObj);
+      console.log(checkAmmounts());
+
+      if (!checkAmmounts()) {
+        greyOutThreads();
       }
 
       checkIfReady();
-      console.log('selected ' + number)
-      console.log('threads selected ' + selectedThreads)
+      console.log('selected ' + colorCode)
+      console.log('threads selected ')
+      console.log(selectedThreads)
     }
   } else {
     greyOutThreads();
+    checkIfReady();
+    // if (find(selectedThreads, colorCode)) {
+    //   document.getElementById("btn-" + colorCode).classList.remove('active');
+    //   const index = selectedThreads.indexOf(colorCode);
 
-    if (find(selectedThreads, number)) {
-      document.getElementById("btn-" + number).classList.remove('active');
-      const index = selectedThreads.indexOf(number);
-      if (index > -1) {
-        selectedThreads.splice(index, 1);
-      }
+    //   if (index > -1) {
+    //     selectedThreads.splice(index, 1);
+    //   }
 
-      if (selectedThreads.length < 4) {
-        greyInThreads();
-      };
+    //   if (checkAmmounts()) {
+    //     greyInThreads();
+    //   };
 
-      checkIfReady();
-      console.log('deselected ' + number)
-      console.log('threads selected ' + selectedThreads)
-    }
+    //   checkIfReady();
+    //   console.log('deselected ' + colorCode)
+    //   console.log('threads selected ' + selectedThreads)
+    // }
   }
 }
 
