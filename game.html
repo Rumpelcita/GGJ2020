@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GGJ2020</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- minify -->
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+    <!-- latest -->
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <!-- core style only -->
+    <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>GGJ2020</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <!-- minify -->
-  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
-  <!-- latest -->
-  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-  <!-- core style only -->
-  <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
+    <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/slider.css'>
 
-  <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
-  <link rel='stylesheet' type='text/css' media='screen' href='css/slider.css'>
-
-  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="lib/phaser.min.js"></script>
-  <script type="text/javascript" src="src/game.js"></script>
-  <script type="text/javascript" src="scripts/select.js"> </script>
-</head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="lib/phaser.min.js"></script>
+    <script type="text/javascript" src="src/game.js"></script>
+    <script type="text/javascript" src="scripts/select.js"> </script>
+  </head>
 
   <body>
     <div id="main-container" class="main-game-container nes-container">
@@ -41,39 +40,33 @@
             <div class="slider-wrapper">
               <div class=inner>
                 <article id="patch-1">
-                  <div class="info">
-                    <button class="nes-btn" id="btn-patch-bat" onclick="toggleSelectPatch('bat')">Select patch bat</button>
-                  </div>
-                  <img src="assets/patches/patch_bat_large.png" alt="bat">
+                  <button id="btn-patch-bat" class="patch-btn" onclick="toggleSelectPatch('bat')">
+                    <img src="assets/patches/patch_bat_large.png" alt="bat">
+                  </button>
                 </article>
 
                 <article id="patch-2">
-                  <div class="info">
-                    <button class="nes-btn" id="btn-patch-2" onclick="toggleSelectPatch('2')">Select patch 2</button>
-                  </div>
-                  <img src="https://placekitten.com/300/300" alt="kitten">
+                  <button class="patch-btn" id="btn-patch-2" onclick="toggleSelectPatch('2')">
+                    <img src="https://placekitten.com/512/512" alt="kitten">
+                  </button>
                 </article>
 
                 <article id="patch-3">
-                  <div class="info">
-                    <button class="nes-btn" id="btn-patch-3" onclick="toggleSelectPatch('3')">Select patch 3</button>
-                  </div>
-                  <img src="https://placekitten.com/300/300" alt="kitten">
-
+                  <button class="patch-btn" id="btn-patch-3" onclick="toggleSelectPatch('3')">
+                   <img src="https://placekitten.com/512/512" alt="kitten">
+                  </button>
                 </article>
 
                 <article id="patch-4">
-                  <div class="info">
-                    <button class="nes-btn" id="btn-patch-4" onclick="toggleSelectPatch('4')">Select patch 4</button>
-                  </div>
-                  <img src="https://placekitten.com/300/300" alt="kitten">
+                  <button class="patch-btn" id="btn-patch-4" onclick="toggleSelectPatch('4')">
+                    <img src="https://placekitten.com/512/512" alt="kitten">
+                  </button>
                 </article>
 
                 <article id="patch-5">
-                  <div class="info">
-                    <button class="nes-btn" id="btn-patch-5" onclick="toggleSelectPatch('5')">Select patch 5</button>
-                  </div>
-                  <img src="https://placekitten.com/300/300" alt="kitten">
+                  <button class="patch-btn" id="btn-patch-5" onclick="toggleSelectPatch('5')">
+                    <img src="https://placekitten.com/512/512" alt="kitten">
+                  </button>
                 </article>
               </div>
               <!-- .inner -->
@@ -140,7 +133,9 @@
         </footer>
       </main>
     </div>
-    <div id="game-container" class="hidden"></div>
+    <div id="game-container" class="hidden">
+      <butto id="ready-btn" class="nes-btn ingame-btn" onclick="patchReady()">ready</button>
+    </div>
   </body>
 </html>
 
