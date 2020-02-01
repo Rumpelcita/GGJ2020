@@ -289,7 +289,7 @@ var preload = {
         ) {
             game.state.start('stitching');
         }
-        
+
     }
 }
 
@@ -303,7 +303,7 @@ var patching = {
     },
 
     update: function(){
-        
+
     }
 }
 
@@ -349,7 +349,7 @@ var patching_preload = {
         if (game.cache.checkImageKey('saved_patch')){
             game.state.start('patching');
         }
-        
+
     }
 }
 
@@ -364,13 +364,6 @@ var patching = {
     },
 
     update: function(){
-        
+
     }
 }
-
-var game = new Phaser.Game(768, 768, Phaser.CANVAS);
-
-game.state.add('stitching', stitching);
-game.state.add('patching_preload', patching_preload);
-game.state.add('patching', patching);
-game.state.start('stitching');
