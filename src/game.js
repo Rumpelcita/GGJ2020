@@ -107,8 +107,8 @@ function createUI() {
 }
 
 function createDrawingArea() {
-    var x = 10;
-    var y = 64;
+    var x = (768 - (16*canvasZoom)) / 2;
+    var y = (768 - (16*canvasZoom)) / 2;
 
     game.create.grid('drawingGrid', 16 * canvasZoom, 16 * canvasZoom, canvasZoom, canvasZoom, 'rgba(161, 159, 143, 0.6)');
 
