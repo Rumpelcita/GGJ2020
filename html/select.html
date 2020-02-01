@@ -19,8 +19,25 @@
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script>
     const allThreads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-
     let selectedThreads = [];
+    let selectedPatch;
+
+    const next = () => alert('selected threads ' + selectedThreads + ' and patch ' + selectedPatch);
+
+    const checkIfReady = () => {
+     const button = document.getElementById('btn-continue');
+      if(selectedThreads.length === 4 && selectedPatch) {
+        button.classList.remove('disabled');
+        console.log('ready')
+      } else {
+        console.log('not ready :(')
+        if (!button.classList.contains('disabled')) {
+          button.classList.add('disabled');
+        }
+      }
+      return
+    }
+
     const find = (arr, number) => arr.find(element => element === number);
     const greyOutThreads = () => allThreads.forEach(
       (thread) => {
@@ -41,10 +58,10 @@
       }
     )
 
-
-
-    const toggleSelect = (number) => {
+    const toggleSelectThread = (number) => {
       //limit ammount of threads here
+
+      checkIfReady();
       if (selectedThreads.length < 4) {
         if (find(selectedThreads, number)) {
           document.getElementById("btn-" + number).classList.remove('active');
@@ -57,6 +74,7 @@
             greyInThreads();
           };
 
+          checkIfReady();
           console.log('deselected ' + number)
           console.log('threads selected ' + selectedThreads)
         } else {
@@ -67,6 +85,7 @@
             greyOutThreads()
           }
 
+          checkIfReady();
           console.log('selected ' + number)
           console.log('threads selected ' + selectedThreads)
         }
@@ -83,11 +102,32 @@
             greyInThreads();
           };
 
+          checkIfReady();
           console.log('deselected ' + number)
           console.log('threads selected ' + selectedThreads)
         }
-
       }
+    }
+
+    const toggleSelectPatch = (patch) => {
+      if (!selectedPatch) {
+        selectedPatch = patch;
+        checkIfReady();
+
+        if (selectedPatch) {
+          document.getElementById("slider-controls").classList.add('hidden');
+        }
+      } else {
+        selectedPatch = null;
+        checkIfReady();
+
+        if (!selectedPatch) {
+          document.getElementById("slider-controls").classList.remove('hidden');
+        }
+      }
+
+      console.log('selected patch ' + selectedPatch)
+
     }
   </script>
 </head>
@@ -96,7 +136,9 @@
   <div class="main-game-container nes-container">
     <main class="select-screen">
       <header>
+        <a class="nes-btn" href="index.html">&lt; back</a>
         <span class="nes-text is-success home-title">Select a patch and color threads</span>
+        <button id="btn-continue" class="nes-btn disabled" onclick="next();">continue ></button>
       </header>
       <section>
         <div class="wrapper">
@@ -108,46 +150,47 @@
 
           <div class="slider-wrapper">
             <div class=inner>
-              <article>
-                <!-- <div class="info top-left">
-                <h3>Malacca</h3>
-              </div> -->
-                <img src="https://farm9.staticflickr.com/8059/28286750501_dcc27b1332_h_d.jpg" />
+              <article id="patch-1">
+                <div class="info">
+                  <button class="nes-btn" onclick="toggleSelectPatch('1')">Select patch</button>
+                </div>
+                <img src="https://placekitten.com/300/300" alt="kitten">
               </article>
 
-              <article>
-                <!-- <div class="info bottom-right">
-                <h3>Cameron Highland</h3>
-              </div> -->
-                <img src="https://farm6.staticflickr.com/5812/23394215774_b76cd33a87_h_d.jpg" />
+              <article id="patch-2">
+                <div class="info">
+                  <button class="nes-btn" onclick="toggleSelectPatch('2')">Select patch</button>
+                </div>
+                <img src="https://placekitten.com/300/300" alt="kitten">
               </article>
 
-              <article>
-                <!-- <div class="info bottom-left">
-                <h3>New Delhi</h3>
-              </div> -->
-                <img src="https://farm8.staticflickr.com/7455/27879053992_ef3f41c4a0_h_d.jpg" />
-              </article>
+              <articl id="patch-3">
+                <div class="info">
+                  <button class="nes-btn" onclick="toggleSelectPatch('3')">Select patch</button>
+                </div>
+                <img src="https://placekitten.com/300/300" alt="kitten">
 
-              <article>
-                <!-- <div class="info top-right">
-                <h3>Ladakh</h3>
-              </div> -->
-                <img src="https://farm8.staticflickr.com/7367/27980898905_72d106e501_h_d.jpg" />
-              </article>
+                </article>
 
-              <article>
-                <!-- <div class="info bottom-left">
-                <h3>Nubra Valley</h3>
-              </div> -->
-                <img src="https://farm8.staticflickr.com/7356/27980899895_9b6c394fec_h_d.jpg" />
-              </article>
+                <article id="patch-4">
+                  <div class="info">
+                    <button class="nes-btn" onclick="toggleSelectPatch('4')">Select patch</button>
+                  </div>
+                  <img src="https://placekitten.com/300/300" alt="kitten">
+                </article>
+
+                <article id="patch-5">
+                  <div class="info">
+                    <button class="nes-btn" onclick="toggleSelectPatch('5')">Select patch</button>
+                  </div>
+                  <img src="https://placekitten.com/300/300" alt="kitten">
+                </article>
             </div>
             <!-- .inner -->
           </div>
           <!-- .slider-wrapper -->
 
-          <div class="slider-prev-next-control">
+          <div id="slider-controls" class="slider-prev-next-control">
             <label class="nes-btn is-primary" for=slide1></label>
             <label class="nes-btn is-primary" for=slide2></label>
             <label class="nes-btn is-primary" for=slide3></label>
@@ -169,18 +212,18 @@
       </section>
       <footer>
         <div class="threads">
-          <button id="btn-1" class="nes-btn thread is-success" onclick="toggleSelect('1')">1</button>
-          <button id="btn-2" class="nes-btn thread is-primary" onclick="toggleSelect('2')">2</button>
-          <button id="btn-3" class="nes-btn thread is-warning" onclick="toggleSelect('3')">3</button>
-          <button id="btn-4" class="nes-btn thread is-error " onclick="toggleSelect('4')">4</button>
-          <button id="btn-5" class="nes-btn thread" onclick="toggleSelect('5')">5</button>
-          <button id="btn-6" class="nes-btn thread is-error " onclick="toggleSelect('6')">6</button>
-          <button id="btn-7" class="nes-btn thread is-error " onclick="toggleSelect('7')">7</button>
-          <button id="btn-8" class="nes-btn thread is-warning" onclick="toggleSelect('8')">8</button>
-          <button id="btn-9" class="nes-btn thread is-error " onclick="toggleSelect('9')">9</button>
-          <button id="btn-10" class="nes-btn thread" onclick="toggleSelect('10')">10</button>
-          <button id="btn-11" class="nes-btn thread is-success" onclick="toggleSelect('11')">11</button>
-          <button id="btn-12" class="nes-btn thread is-primary" onclick="toggleSelect('12')">12</button>
+          <button id="btn-1" class="nes-btn thread is-success" onclick="toggleSelectThread('1')">1</button>
+          <button id="btn-2" class="nes-btn thread is-primary" onclick="toggleSelectThread('2')">2</button>
+          <button id="btn-3" class="nes-btn thread is-warning" onclick="toggleSelectThread('3')">3</button>
+          <button id="btn-4" class="nes-btn thread is-error " onclick="toggleSelectThread('4')">4</button>
+          <button id="btn-5" class="nes-btn thread" onclick="toggleSelectThread('5')">5</button>
+          <button id="btn-6" class="nes-btn thread is-error " onclick="toggleSelectThread('6')">6</button>
+          <button id="btn-7" class="nes-btn thread is-error " onclick="toggleSelectThread('7')">7</button>
+          <button id="btn-8" class="nes-btn thread is-warning" onclick="toggleSelectThread('8')">8</button>
+          <button id="btn-9" class="nes-btn thread is-error " onclick="toggleSelectThread('9')">9</button>
+          <button id="btn-10" class="nes-btn thread" onclick="toggleSelectThread('10')">10</button>
+          <button id="btn-11" class="nes-btn thread is-success" onclick="toggleSelectThread('11')">11</button>
+          <button id="btn-12" class="nes-btn thread is-primary" onclick="toggleSelectThread('12')">12</button>
 
         </div>
       </footer>

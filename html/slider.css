@@ -19,9 +19,9 @@ article {
   float: left;
   position: relative;
 }
-article img {
+/* article img {
   width: 100%;
-}
+} */
 
 /*---- SET UP CONTROL ----*/
 .slider-prev-next-control {
@@ -62,8 +62,6 @@ article img {
   -moz-transition: all 0.3s;
   transition: all 0.3s;
 }
-.slider-dot-control label:hover {
-}
 
 /* Info Box */
 .info {
@@ -76,39 +74,18 @@ article img {
   -webkit-transition: all 1000ms ease-out 600ms;
   -moz-transition: all 1000ms ease-out 600ms;
   transition: all 1000ms ease-out 600ms;
-}
-.info h3 {
-  color: #fcfff4;
-  margin: 0 0 5px;
-  font-weight: normal;
-  font-size: 1.5em;
-  font-style: normal;
-}
-.info.top-left {
   top: 30px;
-  left: 30px;
-}
-.info.top-right {
-  top: 30px;
-  right: 30px;
-}
-.info.bottom-left {
-  bottom: 30px;
-  left: 30px;
-}
-.info.bottom-right {
-  bottom: 30px;
-  right: 30px;
+ right: 30px;
 }
 
 /* Slider Styling */
 .slider-wrapper {
   width: 100%;
   overflow: hidden;
-  border-radius: 5px;
+  /* border-radius: 5px;
   box-shadow: 1px 1px 4px #666;
   background: #fff;
-  background: #fcfff4;
+  background: #fcfff4; */
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -ms-transform: translateZ(0);
