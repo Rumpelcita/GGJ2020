@@ -144,7 +144,7 @@ const toggleSelectPatch = (patch) => {
 
     if (selectedPatch) {
       document.getElementById("slider-controls").classList.add('hidden');
-      document.getElementById("btn-patch-" + patch).innerHTML = 'selected patch ' + selectedPatch;
+      document.getElementById("btn-patch-" + patch).classList.add('active');
     }
   } else {
     selectedPatch = null;
@@ -152,8 +152,22 @@ const toggleSelectPatch = (patch) => {
 
     if (!selectedPatch) {
       document.getElementById("slider-controls").classList.remove('hidden');
-      document.getElementById("btn-patch-" + patch).innerHTML = 'select patch ' + patch;
+      document.getElementById("btn-patch-" + patch).classList.remove('active');
     }
   }
   console.log('selected patch ' + selectedPatch)
+}
+
+const patchReady = () => {
+  var x;
+  bitmapData = [];
+
+  for (var y = 0; y < data.length; y++) {
+      x = data[y].join('');
+      bitmapData.push(x);
+  }
+
+  console.log(x);
+  document.getElementById("ready-btn").classList.add('hidden');
+  game.state.start('patching_preload');
 }

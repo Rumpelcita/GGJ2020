@@ -19,6 +19,21 @@ article {
   float: left;
   position: relative;
 }
+
+.patch-btn {
+  background-color: transparent;
+  color: none;
+  border: none;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.patch-btn:hover {
+  opacity: 0.8;
+}
+.patch-btn.active {
+  opacity: 1;
+}
 /* article img {
   height: 100%;
 } */
