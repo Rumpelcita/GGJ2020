@@ -345,7 +345,8 @@ var patching_preload = {
     },
 
     update: function(){
-        if (Phaser.Cache.checkImageKey('saved_patch')){
+        console.log('loading...');
+        if (game.cache.checkImageKey('saved_patch')){
             game.state.start('patching');
         }
         
@@ -358,7 +359,7 @@ var patching = {
     },
 
     create: function(){
-        game.load.start();
+        console.log(bitmapData);
         paletteArrow = game.add.sprite(8, 36, 'saved_patch');
     },
 
