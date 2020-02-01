@@ -159,6 +159,7 @@ body {
   right: 525px;
   background-color: #B2DCEF;
 }
+
 .disabled {
   opacity: 0.1;
   pointer-events: none;
