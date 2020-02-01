@@ -30,6 +30,12 @@ var previewBG;
 var data;
 var bitmapData;
 
+// Threads
+var thread_size = {};
+
+var thread_limits = {
+    'bat': 24
+};
 
 function resetData() {
 
@@ -157,13 +163,17 @@ function cls() {
 function drawPalette() {
 
     //  Draw the palette to the UI bmd
-    ui.clear(0, 0, 32 * 16, 32);
+    ui.clear(0, 0, 32 * 4, 32);
 
     var x = 0;
 
     for (var clr in threads) {
-        ui.rect(x, 0, 32, 32, game.create.palettes[palette][clr]);
+        ui.rect(x, 0, 32, 32, game.create.palettes[palette][clr['color']]);
         x += 32;
+
+        console.log(clr['clr']);
+
+        thread_size[clr['color']] += clr['ammount'];
     }
 
     ui.copy('uiGrid');
@@ -258,11 +268,6 @@ function paint(pointer) {
 
     console.log();
 }
-
-function patch() {
-    game.state.start('patching');
-}
-
 
 var preload = {
     preload: function(){
