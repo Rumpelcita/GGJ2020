@@ -18,9 +18,76 @@
 
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script>
-    const select = (number) => {
-      document.getElementById("btn-" + number).classList.add('active')
-      console.log('selected' + number)
+    const allThreads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+
+    let selectedThreads = [];
+    const find = (arr, number) => arr.find(element => element === number);
+    const greyOutThreads = () => allThreads.forEach(
+      (thread) => {
+        if (!find(selectedThreads, thread)) {
+          // console.log('greyout ' + thread)
+          document.getElementById('btn-' + thread).classList.add('disabled');
+        }
+        return
+      }
+    )
+    const greyInThreads = () => allThreads.forEach(
+      (thread) => {
+        if (!find(selectedThreads, thread)) {
+          // console.log('greyin ' + thread)
+          document.getElementById('btn-' + thread).classList.remove('disabled');
+        }
+        return
+      }
+    )
+
+
+
+    const toggleSelect = (number) => {
+      //limit ammount of threads here
+      if (selectedThreads.length < 4) {
+        if (find(selectedThreads, number)) {
+          document.getElementById("btn-" + number).classList.remove('active');
+          const index = selectedThreads.indexOf(number);
+          if (index > -1) {
+            selectedThreads.splice(index, 1);
+          }
+
+          if (selectedThreads.length < 4) {
+            greyInThreads();
+          };
+
+          console.log('deselected ' + number)
+          console.log('threads selected ' + selectedThreads)
+        } else {
+          document.getElementById("btn-" + number).classList.add('active');
+          selectedThreads.push(number);
+
+          if (selectedThreads.length == 4) {
+            greyOutThreads()
+          }
+
+          console.log('selected ' + number)
+          console.log('threads selected ' + selectedThreads)
+        }
+      } else {
+        greyOutThreads();
+        if (find(selectedThreads, number)) {
+          document.getElementById("btn-" + number).classList.remove('active');
+          const index = selectedThreads.indexOf(number);
+          if (index > -1) {
+            selectedThreads.splice(index, 1);
+          }
+
+          if (selectedThreads.length < 4) {
+            greyInThreads();
+          };
+
+          console.log('deselected ' + number)
+          console.log('threads selected ' + selectedThreads)
+        }
+
+      }
     }
   </script>
 </head>
@@ -102,11 +169,19 @@
       </section>
       <footer>
         <div class="threads">
-          <button id="btn-1" class="nes-btn thread is-success" onclick="select('1')" ></button>
-          <button id="btn-2" class="nes-btn thread is-primary" onclick="select('2')"></button>
-          <button id="btn-3" class="nes-btn thread is-warning" onclick="select('3')"></button>
-          <button id="btn-4" class="nes-btn thread is-error " onclick="select('4')"></button>
-          <button id="btn-5" class="nes-btn thread" onclick="select('5')"></button>
+          <button id="btn-1" class="nes-btn thread is-success" onclick="toggleSelect('1')">1</button>
+          <button id="btn-2" class="nes-btn thread is-primary" onclick="toggleSelect('2')">2</button>
+          <button id="btn-3" class="nes-btn thread is-warning" onclick="toggleSelect('3')">3</button>
+          <button id="btn-4" class="nes-btn thread is-error " onclick="toggleSelect('4')">4</button>
+          <button id="btn-5" class="nes-btn thread" onclick="toggleSelect('5')">5</button>
+          <button id="btn-6" class="nes-btn thread is-error " onclick="toggleSelect('6')">6</button>
+          <button id="btn-7" class="nes-btn thread is-error " onclick="toggleSelect('7')">7</button>
+          <button id="btn-8" class="nes-btn thread is-warning" onclick="toggleSelect('8')">8</button>
+          <button id="btn-9" class="nes-btn thread is-error " onclick="toggleSelect('9')">9</button>
+          <button id="btn-10" class="nes-btn thread" onclick="toggleSelect('10')">10</button>
+          <button id="btn-11" class="nes-btn thread is-success" onclick="toggleSelect('11')">11</button>
+          <button id="btn-12" class="nes-btn thread is-primary" onclick="toggleSelect('12')">12</button>
+
         </div>
       </footer>
     </main>

@@ -72,6 +72,7 @@ body {
 .threads {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .thread {
@@ -87,5 +88,39 @@ body {
   right: 0;
 }
 #btn-2 {
-  right: 40px;
+  right: 50px;
+}
+#btn-3 {
+  right: 100px;
+}
+#btn-4 {
+  right: 150px;
+}
+#btn-5 {
+  right: 200px;
+}
+#btn-6 {
+  right: 250px;
+}
+#btn-7 {
+  right: 300px;
+}
+#btn-8 {
+  right: 350px;
+}
+#btn-9 {
+  right: 400px;
+}
+#btn-10 {
+  right: 450px;
+}
+#btn-11 {
+  right: 515px;
+}
+#btn-12 {
+  right: 580px;
+}
+.disabled {
+  opacity: 0.1;
+  pointer-events: none;
 }
