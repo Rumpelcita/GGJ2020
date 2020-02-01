@@ -1,5 +1,3 @@
-var game = new Phaser.Game(768, 768, Phaser.CANVAS, 'phaser-example', { create: create });
-
 //  Dimensions
 var spriteWidth = 16;
 var spriteHeight = 16;
@@ -51,21 +49,19 @@ function resetData() {
 }
 
 function dataToBitmap() {
-    var bitmapData = [];
     var x;
+    bitmapData = [];
 
     for (var y = 0; y < data.length; y++) {
         x = data[y].join('');
         bitmapData.push(x);
     }
 
-    console.log(bitmapData);
+    game.state.start('patching_preload');
 }
 
 
 function createUI() {
-
-    game.create.grid('uiGrid', 32 * 16, 32, 32, 32, 'rgba(255,255,255,0.5)');
 
     //  Create some icons
     var arrow = [
@@ -92,6 +88,8 @@ function createUI() {
     game.create.texture('arrow', arrow, 2);
     game.create.texture('save', disk, 4);
 
+    game.create.grid('uiGrid', 32 * 16, 32, 32, 32, 'rgba(255,255,255,0.5)');
+
     ui = game.make.bitmapData(800, 32);
 
     drawPalette();
@@ -110,13 +108,13 @@ function createUI() {
 
 function createDrawingArea() {
 
-    game.create.grid('drawingGrid', 16 * canvasZoom, 16 * canvasZoom, canvasZoom, canvasZoom, 'rgba(0,191,243,0.8)');
+    game.create.grid('drawingGrid', 16 * canvasZoom, 16 * canvasZoom, canvasZoom, canvasZoom, 'rgba(161, 159, 143, 0.6)');
 
     canvas = game.make.bitmapData(spriteWidth * canvasZoom, spriteHeight * canvasZoom);
     canvasBG = game.make.bitmapData(canvas.width + 2, canvas.height + 2);
 
-    canvasBG.rect(0, 0, canvasBG.width, canvasBG.height, '#fff');
-    canvasBG.rect(1, 1, canvasBG.width - 2, canvasBG.height - 2, '#fff');
+    canvasBG.rect(0, 0, canvasBG.width, canvasBG.height, '#DEDDCB');
+    canvasBG.rect(1, 1, canvasBG.width - 2, canvasBG.height - 2, '#DEDDCB');
 
     var x = 10;
     var y = 64;
@@ -125,7 +123,6 @@ function createDrawingArea() {
     canvasSprite = canvas.addToWorld(x + 1, y + 1);
     canvasGrid = game.add.sprite(x + 1, y + 1, 'drawingGrid');
     canvasGrid.crop(new Phaser.Rectangle(0, 0, spriteWidth * canvasZoom, spriteHeight * canvasZoom));
-
 }
 
 function refresh() {
@@ -222,26 +219,6 @@ function prevColor() {
 
 }
 
-function create() {
-
-    //   So we can right-click to erase
-    document.body.oncontextmenu = function() { return false; };
-
-    Phaser.Canvas.setUserSelect(game.canvas, 'none');
-    Phaser.Canvas.setTouchAction(game.canvas, 'none');
-
-    game.stage.backgroundColor = '#ebf2f5';
-
-    resetData();
-
-    createUI();
-    createDrawingArea();
-    createEventListeners();
-
-    setColor(1);
-
-}
-
 function onDown(pointer) {
 
     if (pointer.y <= 32) {
@@ -291,3 +268,108 @@ function paint(pointer) {
         canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
     }
 }
+
+function patch() {
+    game.state.start('patching');
+}
+
+
+var preload = {
+    preload: function(){
+
+    },
+
+    create: function(){
+
+    },
+
+    update: function(){
+        if ('arrow' in game.cache.image &&
+            'save' in game.cache.image
+        ) {
+            game.state.start('stitching');
+        }
+        
+    }
+}
+
+var patching = {
+    preload: function(){
+
+    },
+
+    create: function(){
+
+    },
+
+    update: function(){
+        
+    }
+}
+
+var stitching = {
+    preload: function(){
+
+    },
+
+    create: function(){
+        //   So we can right-click to erase
+        document.body.oncontextmenu = function() { return false; };
+
+        Phaser.Canvas.setUserSelect(game.canvas, 'none');
+        Phaser.Canvas.setTouchAction(game.canvas, 'none');
+
+        game.stage.backgroundColor = '#ebf2f5';
+
+        resetData();
+
+        createUI();
+        createDrawingArea();
+        createEventListeners();
+
+        setColor(1);
+
+    },
+
+    update: function(){
+
+    }
+}
+
+var patching_preload = {
+    preload: function(){
+        game.create.texture(bitmapData, 'saved_patch', 16);
+    },
+
+    create: function(){
+    },
+
+    update: function(){
+        if (Phaser.Cache.checkImageKey('saved_patch')){
+            game.state.start('patching');
+        }
+        
+    }
+}
+
+var patching = {
+    preload: function(){
+        game.create.texture(bitmapData, 'saved_patch', 16);
+    },
+
+    create: function(){
+        game.load.start();
+        paletteArrow = game.add.sprite(8, 36, 'saved_patch');
+    },
+
+    update: function(){
+        
+    }
+}
+
+var game = new Phaser.Game(768, 768, Phaser.CANVAS);
+
+game.state.add('stitching', stitching);
+game.state.add('patching_preload', patching_preload);
+game.state.add('patching', patching);
+game.state.start('stitching');
