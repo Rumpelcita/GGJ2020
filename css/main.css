@@ -18,6 +18,7 @@ body {
 .main-game-container {
   width: 768px;
   height: 768px;
+  padding: 5px;
   overflow: hidden;
 }
 
@@ -69,64 +70,94 @@ body {
   width: 100%;
 }
 
+.select-title {
+  padding:0 20px 0;
+  box-sizing: border-box;
+}
+
 .threads {
-  width: 100%;
+  width: 75%;
   height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
   position: relative;
 }
 
 .thread {
   position: absolute;
   bottom: 0;
+  color: white;
 }
 
 .active {
-  bottom: 50px;
+  bottom: 35px;
 }
 
-#btn-1 {
+#btn-0 {
   right: 0;
+  background-color: #000;
+}
+#btn-1 {
+  right: 35px;
+  background-color: #9D9D9D;
 }
 #btn-2 {
-  right: 50px;
+  right: 70px;
+  color: black;
+  background-color: #fff;
 }
 #btn-3 {
-  right: 100px;
+  right: 105px;
+  background-color: #BE2633;
 }
 #btn-4 {
-  right: 150px;
+  right: 140px;
+  background-color: #E06F8B;
 }
 #btn-5 {
-  right: 200px;
+  right: 175px;
+  background-color: #493C2B;
 }
 #btn-6 {
-  right: 250px;
+  right: 210px;
+  background-color: #A46422;
 }
 #btn-7 {
-  right: 300px;
+  right: 245px;
+  background-color: #EB8931;
 }
 #btn-8 {
-  right: 350px;
+  right: 280px;
+  background-color: #F7E26B;
 }
 #btn-9 {
-  right: 400px;
+  right: 315px;
+  background-color: #2F484E;
 }
 #btn-A {
-  right: 450px;
+  right: 350px;
+  background-color: #44891A;
 }
 #btn-B {
-  right: 500px;
+  right: 385px;
+  background-color: #A3CE27;
 }
 #btn-C {
-  right: 550px;
+  right: 420px;
+  background-color: #1B2632;
 }
-
 #btn-D {
-  right: 600px;
+  right: 455px;
+  background-color: #005784;
 }
 
+#btn-E {
+  right: 490px;
+  background-color: #31A2F2;
+}
 #btn-F {
-  right: 650px;
+  right: 525px;
+  background-color: #B2DCEF;
 }
 .disabled {
   opacity: 0.1;
