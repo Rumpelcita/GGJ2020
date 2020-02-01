@@ -91,8 +91,8 @@ function refresh() {
             var i = data[y][x];
 
             if (i !== ' ') {
-                color = game.create.palettes[palette][i];
-                canvas.rect(x * canvasZoom, y * canvasZoom, canvasZoom, canvasZoom, colorIndex);
+                var color = game.create.palettes[palette][i];
+                canvas.rect(x * canvasZoom, y * canvasZoom, canvasZoom, canvasZoom, color);
             }
         }
     }
@@ -150,6 +150,7 @@ function onUp() {
 
 function paint(pointer) {
     var colorIndex = document.querySelector('input[name="colors"]:checked').value;
+    var color = game.create.palettes[palette][colorIndex];
     console.log(colorIndex);
 
     var amount = thread_size[colorIndex]; 
@@ -177,12 +178,12 @@ function paint(pointer) {
 
     if (isErase) {
         data[y2][x2] = ' ';
-        canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, colorIndex);
+        canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, color);
     } else {
         //if (amount > 0) {
             data[y2][x2] = pmap[colorIndex];
-            canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, colorIndex, 3);
-            canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, colorIndex, 3);
+            canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
+            canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
             thread_size[colorIndex] -= 2;
         //}
     }
