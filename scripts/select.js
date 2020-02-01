@@ -11,7 +11,7 @@ game.state.add('patching_preload', patching_preload);
 game.state.add('patching', patching);
 game.state.add('parameters', { preload: parameters, update: startStitching });
 
-const initializePaserGame = () => {
+const initializePhaserGame = () => {
   game.state.start('parameters');
 
   return
@@ -23,13 +23,15 @@ const next = () => {
   console.log('and patch ' + selectedPatch);
   document.getElementById('main-container').classList.add('hidden');
   document.getElementById('game-container').classList.remove('invisible');
-  initializePaserGame();
+  checkIfChecked();
+  initializePhaserGame();
 };
 
 const checkIfChecked = () => {
   if(document.querySelector('input[name="colors"]:checked') === null) {
     if(selectedThreads.length > 0) {
       const color = selectedThreads[0].color;
+      console.log(color)
       document.getElementById('radio-' + color + '-input').checked = true;
     }
   }
@@ -122,7 +124,7 @@ const selectThread = (colorCode) => {
       if (!checkAmmounts()) {
         greyOutThreads();
       }
-
+      checkIfChecked();
       checkIfReady();
       console.log('selected ' + colorCode)
       console.log('threads selected ')
