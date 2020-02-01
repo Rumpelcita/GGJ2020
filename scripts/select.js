@@ -1,4 +1,4 @@
-const allThreads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+const allThreads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C','D', 'E', 'F'];
 let selectedThreads = [];
 let selectedPatch;
 var game = new Phaser.Game(768, 768, Phaser.CANVAS, 'game-container');
