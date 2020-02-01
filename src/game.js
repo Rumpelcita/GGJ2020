@@ -86,7 +86,7 @@ function createUI() {
     ];
 
     game.create.texture('arrow', arrow, 2);
-    game.create.texture('save', disk, 4);
+    //game.create.texture('save', disk, 4);
 
     game.create.grid('uiGrid', 32 * 16, 32, 32, 32, 'rgba(255,255,255,0.5)');
 
@@ -100,10 +100,10 @@ function createUI() {
 
     paletteArrow = game.add.sprite(8, 36, 'arrow');
 
-    saveIcon = game.add.sprite(600, 550, 'save');
-    saveIcon.inputEnabled = true;
-    saveIcon.input.useHandCursor = true;
-    saveIcon.events.onInputDown.add(dataToBitmap, this);
+    // saveIcon = game.add.sprite(600, 550, 'save');
+    // saveIcon.inputEnabled = true;
+    // saveIcon.input.useHandCursor = true;
+    //saveIcon.events.onInputDown.add(dataToBitmap, this);
 }
 
 function createDrawingArea() {
