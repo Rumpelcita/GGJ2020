@@ -18,6 +18,10 @@
 
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script>
+    const select = (number) => {
+      document.getElementById("btn-" + number).classList.add('active')
+      console.log('selected' + number)
+    }
   </script>
 </head>
 
@@ -93,11 +97,17 @@
           <label for=slide5></label>
         </div> -->
           <!-- .slider-dot-control -->
-      </div>
+        </div>
 
       </section>
       <footer>
-        <span>threads</span>
+        <div class="threads">
+          <button id="btn-1" class="nes-btn thread is-success" onclick="select('1')" ></button>
+          <button id="btn-2" class="nes-btn thread is-primary" onclick="select('2')"></button>
+          <button id="btn-3" class="nes-btn thread is-warning" onclick="select('3')"></button>
+          <button id="btn-4" class="nes-btn thread is-error " onclick="select('4')"></button>
+          <button id="btn-5" class="nes-btn thread" onclick="select('5')"></button>
+        </div>
       </footer>
     </main>
   </div>
