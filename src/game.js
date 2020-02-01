@@ -255,6 +255,10 @@ function paint(pointer) {
         return;
     }
 
+    if (x1 == x2 || y1 == y2){
+        return;
+    }
+
     if (!isDown) {
         return;
     }
@@ -266,6 +270,11 @@ function paint(pointer) {
         data[y2][x2] = pmap[colorIndex];
         canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
         canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
+        // console.log('x1:' + x1);
+        // console.log('y1:' + y1);
+        // console.log('x2:' + x2);
+        // console.log('y2:' + y2);
+        // console.log('=====================');
     }
 }
 
@@ -338,7 +347,7 @@ var stitching = {
 
 var patching_preload = {
     preload: function(){
-        game.create.texture(bitmapData, 'saved_patch', 16);
+        game.create.texture(bitmapData, 'saved_patch');
     },
 
     create: function(){
@@ -355,7 +364,6 @@ var patching_preload = {
 
 var patching = {
     preload: function(){
-        game.create.texture(bitmapData, 'saved_patch', 16);
     },
 
     create: function(){
