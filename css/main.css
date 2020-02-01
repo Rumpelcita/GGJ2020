@@ -94,9 +94,11 @@ body {
   background-color: #000;
 }
 .btn-1 {
+  color: black;
   background-color: #9D9D9D;
 }
 .btn-2 {
+  color: black;
   background-color: #fff;
 }
 .btn-3 {
@@ -115,6 +117,7 @@ body {
   background-color: #EB8931;
 }
 .btn-8 {
+  color: black;
   background-color: #F7E26B;
 }
 .btn-9 {
@@ -124,6 +127,7 @@ body {
   background-color: #44891A;
 }
 .btn-B {
+  color: black;
   background-color: #A3CE27;
 }
 .btn-C {
@@ -136,6 +140,7 @@ body {
   background-color: #31A2F2;
 }
 .btn-F {
+  color: black;
   background-color: #B2DCEF;
 }
 
