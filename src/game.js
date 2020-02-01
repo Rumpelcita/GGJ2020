@@ -22,7 +22,7 @@ var isErase = false;
 var ci = 0;
 var color = 0;
 var palette = 0;
-var pmap = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
+var pmap = [];
 
 //  Sprite Preview
 var preview;
@@ -30,17 +30,21 @@ var previewBG;
 var data;
 var bitmapData;
 
+// Threads
+var thread_size = {};
+
+var thread_limits = {
+    'bat': 24
+};
 
 function resetData() {
 
     data = [];
 
-    for (var y = 0; y < spriteHeight; y++)
-    {
+    for (var y = 0; y < spriteHeight; y++) {
         var a = [];
 
-        for (var x = 0; x < spriteWidth; x++)
-        {
+        for (var x = 0; x < spriteWidth; x++) {
             a.push(' ');
         }
 
@@ -58,52 +62,6 @@ function dataToBitmap() {
     }
 
     game.state.start('patching_preload');
-}
-
-
-function createUI() {
-
-    //  Create some icons
-    var arrow = [
-        '  22  ',
-        '  22  ',
-        '222222',
-        ' 2222 ',
-        '  22  '
-    ];
-
-    var disk = [
-        'DDDDDDDDDD',
-        'DED1111DED',
-        'DED1111DDD',
-        'DEDDDDDDED',
-        'DEEEEEEEED',
-        'DEFFFFFFED',
-        'DEFF222FED',
-        'DEFF222FED',
-        'DEFF222FED',
-        'DDDDDDDDDD'
-    ];
-
-    game.create.texture('arrow', arrow, 2);
-    //game.create.texture('save', disk, 4);
-
-    game.create.grid('uiGrid', 32 * 16, 32, 32, 32, 'rgba(255,255,255,0.5)');
-
-    ui = game.make.bitmapData(768, 32);
-
-    drawPalette();
-
-    ui.addToWorld();
-
-    var style = { font: "20px Courier", fill: "#fff", tabs: 80 };
-
-    paletteArrow = game.add.sprite(8, 38, 'arrow');
-
-    // saveIcon = game.add.sprite(600, 550, 'save');
-    // saveIcon.inputEnabled = true;
-    // saveIcon.input.useHandCursor = true;
-    //saveIcon.events.onInputDown.add(dataToBitmap, this);
 }
 
 function createDrawingArea() {
@@ -154,48 +112,18 @@ function cls() {
     refresh();
 }
 
-function drawPalette() {
-
-    //  Draw the palette to the UI bmd
-    ui.clear(0, 0, 32 * 16, 32);
-
-    var x = 0;
-
+function setThreadLimits() {
     for (var clr in threads) {
-        ui.rect(x, 0, 32, 32, game.create.palettes[palette][clr]);
-        x += 32;
+        color = clr['color']; 
+
+        if (!color in pmap){
+            pmap.push(clr);
+        }
+
+        console.log(clr['clr']);
+
+        thread_size[clr['color']] += clr['ammount'];
     }
-
-    ui.copy('uiGrid');
-
-}
-
-function setColor(i) {
-    if (i < 0) {
-        i = threads.length - 1;
-    } else if (i >= threads.length - 1) {
-        i = 0;
-    }
-
-    colorIndex = i;
-    color = game.create.palettes[palette][pmap[colorIndex]];
-
-    paletteArrow.x = (i * 32) + 8;
-
-}
-
-function nextColor() {
-
-    var i = colorIndex + 1;
-    setColor(i);
-
-}
-
-function prevColor() {
-
-    var i = colorIndex - 1;
-    setColor(i);
-
 }
 
 function onDown(pointer) {
@@ -222,6 +150,10 @@ function onUp() {
 
 function paint(pointer) {
 
+    colorIndex = document.querySelector('input[name="colors"]:checked').value;
+
+    var amount = thread_size[colorIndex]; 
+
     var x1 = game.math.snapToCeil(pointer.x - canvasSprite.x, canvasZoom) / canvasZoom;
     var y1 = game.math.snapToCeil(pointer.y - canvasSprite.y, canvasZoom) / canvasZoom;
 
@@ -246,23 +178,16 @@ function paint(pointer) {
         data[y2][x2] = ' ';
         canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, color);
     } else {
-        data[y2][x2] = pmap[colorIndex];
-        canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
-        canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
-        // console.log('x1:' + x1);
-        // console.log('y1:' + y1);
-        // console.log('x2:' + x2);
-        // console.log('y2:' + y2);
-        // console.log('=====================');
+        if (amount > 0) {
+            data[y2][x2] = pmap[colorIndex];
+            canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
+            canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
+            thread_size[colorIndex] -= 2;
+        }
     }
 
     console.log();
 }
-
-function patch() {
-    game.state.start('patching');
-}
-
 
 var preload = {
     preload: function(){
@@ -317,7 +242,7 @@ var stitching = {
         createDrawingArea();
         createEventListeners();
 
-        setColor(1);
+        setThreadLimits();
 
     },
 
