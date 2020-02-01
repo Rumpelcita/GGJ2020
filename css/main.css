@@ -81,7 +81,7 @@ body {
 }
 
 .active {
- top: 0
+ bottom: 50px;
 }
 
 #btn-1 {
