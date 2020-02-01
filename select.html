@@ -13,8 +13,8 @@
   <!-- core style only -->
   <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 
-  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-  <link rel='stylesheet' type='text/css' media='screen' href='slider.css'>
+  <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+  <link rel='stylesheet' type='text/css' media='screen' href='css/slider.css'>
 
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script>
@@ -22,7 +22,10 @@
     let selectedThreads = [];
     let selectedPatch;
 
-    const next = () => alert('selected threads ' + selectedThreads + ' and patch ' + selectedPatch);
+    const next = () =>{
+      console.log('selected threads ' + selectedThreads + ' and patch ' + selectedPatch)
+      window.location.href='game.html';
+    };
 
     const checkIfReady = () => {
       const button = document.getElementById('btn-continue');
