@@ -20,7 +20,6 @@ var isErase = false;
 
 //  Palette
 var ci = 0;
-var color = 0;
 var palette = 0;
 var pmap = [];
 
@@ -82,6 +81,7 @@ function createDrawingArea() {
 }
 
 function refresh() {
+    var colorIndex = document.querySelector('input[name="colors"]:checked').value;
 
     //  Update Canvas
     canvas.clear();
@@ -92,7 +92,7 @@ function refresh() {
 
             if (i !== ' ') {
                 color = game.create.palettes[palette][i];
-                canvas.rect(x * canvasZoom, y * canvasZoom, canvasZoom, canvasZoom, color);
+                canvas.rect(x * canvasZoom, y * canvasZoom, canvasZoom, canvasZoom, colorIndex);
             }
         }
     }
@@ -149,10 +149,11 @@ function onUp() {
 }
 
 function paint(pointer) {
-
-    colorIndex = document.querySelector('input[name="colors"]:checked').value;
+    var colorIndex = document.querySelector('input[name="colors"]:checked').value;
+    console.log(colorIndex);
 
     var amount = thread_size[colorIndex]; 
+    console.log('amount:' + thread_size);
 
     var x1 = game.math.snapToCeil(pointer.x - canvasSprite.x, canvasZoom) / canvasZoom;
     var y1 = game.math.snapToCeil(pointer.y - canvasSprite.y, canvasZoom) / canvasZoom;
@@ -176,14 +177,14 @@ function paint(pointer) {
 
     if (isErase) {
         data[y2][x2] = ' ';
-        canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, color);
+        canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, colorIndex);
     } else {
-        if (amount > 0) {
+        //if (amount > 0) {
             data[y2][x2] = pmap[colorIndex];
-            canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
-            canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
+            canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, colorIndex, 3);
+            canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, colorIndex, 3);
             thread_size[colorIndex] -= 2;
-        }
+        //}
     }
 }
 
@@ -197,12 +198,7 @@ var preload = {
     },
 
     update: function(){
-        if ('arrow' in game.cache.image &&
-            'save' in game.cache.image
-        ) {
             game.state.start('stitching');
-        }
-
     }
 }
 
