@@ -111,14 +111,22 @@ body {
 #btn-9 {
   right: 400px;
 }
-#btn-10 {
+#btn-A {
   right: 450px;
 }
-#btn-11 {
-  right: 515px;
+#btn-B {
+  right: 500px;
 }
-#btn-12 {
-  right: 580px;
+#btn-C {
+  right: 550px;
+}
+
+#btn-D {
+  right: 600px;
+}
+
+#btn-F {
+  right: 650px;
 }
 .disabled {
   opacity: 0.1;
