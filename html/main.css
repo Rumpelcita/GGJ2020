@@ -6,14 +6,22 @@ body {
   text-align: center;
 }
 
+.creditos a {
+  color: black;
+  text-decoration: underline;
+}
+
+.creditos a:hover {
+  text-decoration: none;
+}
+
 .main-game-container {
   width: 768px;
   height: 768px;
-  border: 3px solid black;
   overflow: hidden;
 }
 
-main {
+.main-menu {
   width: 50%;
   margin: 0 auto;
   display: flex;
@@ -21,14 +29,18 @@ main {
   flex-direction: column;
 }
 
-header {
+.select-screen {
+  height: 100%;
+}
+
+.main-menu header, .select-screen header {
   height: 30%;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
 }
 
-nav {
-  /* border: 1px solid gray; */
+.main-menu nav {
   width: 100%;
   height:50%;
   display: flex;
@@ -36,9 +48,22 @@ nav {
   justify-content: center;
 }
 
-footer {
+.main-menu footer {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
 
+.select-screen header {
+  height: 20%;
+}
+.select-screen section {
+  height: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select-screen footer {
+  height: 100%;
 }
