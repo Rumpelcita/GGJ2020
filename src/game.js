@@ -66,9 +66,9 @@ function createUI() {
     //  Create some icons
     var arrow = [
         '  22  ',
-        ' 2222 ',
-        '222222',
         '  22  ',
+        '222222',
+        ' 2222 ',
         '  22  '
     ];
 
@@ -90,7 +90,7 @@ function createUI() {
 
     game.create.grid('uiGrid', 32 * 16, 32, 32, 32, 'rgba(255,255,255,0.5)');
 
-    ui = game.make.bitmapData(800, 32);
+    ui = game.make.bitmapData(768, 32);
 
     drawPalette();
 
@@ -98,7 +98,7 @@ function createUI() {
 
     var style = { font: "20px Courier", fill: "#fff", tabs: 80 };
 
-    paletteArrow = game.add.sprite(8, 36, 'arrow');
+    paletteArrow = game.add.sprite(8, 38, 'arrow');
 
     // saveIcon = game.add.sprite(600, 550, 'save');
     // saveIcon.inputEnabled = true;
@@ -107,19 +107,17 @@ function createUI() {
 }
 
 function createDrawingArea() {
+    var x = 10;
+    var y = 64;
 
     game.create.grid('drawingGrid', 16 * canvasZoom, 16 * canvasZoom, canvasZoom, canvasZoom, 'rgba(161, 159, 143, 0.6)');
 
     canvas = game.make.bitmapData(spriteWidth * canvasZoom, spriteHeight * canvasZoom);
-    canvasBG = game.make.bitmapData(canvas.width + 2, canvas.height + 2);
 
-    canvasBG.rect(0, 0, canvasBG.width, canvasBG.height, '#DEDDCB');
-    canvasBG.rect(1, 1, canvasBG.width - 2, canvasBG.height - 2, '#DEDDCB');
+    bg_patch = game.add.sprite(x+1, y+1, 'patch');
+    bg_patch.tint = 'rgba(239, 211, 0, 0.6)';
+    bg_patch.alpha = 0.2;
 
-    var x = 10;
-    var y = 64;
-
-    canvasBG.addToWorld(x, y);
     canvasSprite = canvas.addToWorld(x + 1, y + 1);
     canvasGrid = game.add.sprite(x + 1, y + 1, 'drawingGrid');
     canvasGrid.crop(new Phaser.Rectangle(0, 0, spriteWidth * canvasZoom, spriteHeight * canvasZoom));
@@ -163,7 +161,7 @@ function drawPalette() {
 
     var x = 0;
 
-    for (var clr in game.create.palettes[palette]) {
+    for (var clr in threads) {
         ui.rect(x, 0, 32, 32, game.create.palettes[palette][clr]);
         x += 32;
     }
@@ -172,29 +170,10 @@ function drawPalette() {
 
 }
 
-function changePalette() {
-
-    palette++;
-
-    if (!game.create.palettes[palette]) {
-        palette = 0;
-    }
-
-    drawPalette();
-    refresh();
-
-}
-
-function setColor(i, p) {
-
-    if (typeof p !== 'undefined') {
-        //  It came from a Keyboard Event, in which case the color index is in p, not i.
-        i = p;
-    }
-
+function setColor(i) {
     if (i < 0) {
-        i = 15;
-    } else if (i >= 16) {
+        i = threads.length - 1;
+    } else if (i >= threads.length - 1) {
         i = 0;
     }
 
@@ -265,7 +244,7 @@ function paint(pointer) {
 
     if (isErase) {
         data[y2][x2] = ' ';
-        canvas.clear(x1 * canvasZoom, y1 * canvasZoom, canvasZoom, canvasZoom, color);
+        canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, color);
     } else {
         data[y2][x2] = pmap[colorIndex];
         canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
@@ -276,6 +255,8 @@ function paint(pointer) {
         // console.log('y2:' + y2);
         // console.log('=====================');
     }
+
+    console.log();
 }
 
 function patch() {
@@ -318,7 +299,7 @@ var patching = {
 
 var stitching = {
     preload: function(){
-
+        game.load.image('patch', "assets/patches/patch_" + patch + "_large.png");
     },
 
     create: function(){
