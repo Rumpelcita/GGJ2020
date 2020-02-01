@@ -22,7 +22,7 @@ const next = () => {
   console.log(selectedThreads)
   console.log('and patch ' + selectedPatch);
   document.getElementById('main-container').classList.add('hidden');
-  document.getElementById('game-container').classList.remove('hidden');
+  document.getElementById('game-container').classList.remove('invisible');
   initializePaserGame();
 };
 
@@ -78,6 +78,8 @@ const deselectThread = (colorCode) => {
 
   if (colorObj.ammount == 0) {
     document.getElementById("btn-" + colorCode + '-selected').classList.add('hidden');
+    document.getElementById("radio-" + colorCode).classList.add('hidden');
+
     const index = selectedThreads.indexOf(colorObj);
 
     if (index > -1) {
@@ -117,6 +119,7 @@ const selectThread = (colorCode) => {
 
     } else {
       document.getElementById("btn-" + colorCode + '-selected').classList.remove('hidden');
+      document.getElementById("radio-" + colorCode).classList.remove('hidden');
       colorObj.ammount = 1;
       document.getElementById("btn-" + colorCode + '-selected').innerHTML = colorObj.ammount;
 
