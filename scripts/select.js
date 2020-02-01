@@ -1,15 +1,15 @@
-
 const allThreads = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 let selectedThreads = [];
 let selectedPatch;
 
-const next = () =>{
-  console.log('selected threads ' + selectedThreads + ' and patch ' + selectedPatch)
-  window.location.href='game.html';
+const next = () => {
+  console.log('selected threads ' + selectedThreads + ' and patch ' + selectedPatch);
+  window.location.href = 'game.html';
 };
 
 const checkIfReady = () => {
   const button = document.getElementById('btn-continue');
+
   if (selectedThreads.length === 4 && selectedPatch) {
     button.classList.remove('disabled');
     console.log('ready')
@@ -23,6 +23,7 @@ const checkIfReady = () => {
 }
 
 const find = (arr, number) => arr.find(element => element === number);
+
 const greyOutThreads = () => allThreads.forEach(
   (thread) => {
     if (!find(selectedThreads, thread)) {
@@ -31,16 +32,16 @@ const greyOutThreads = () => allThreads.forEach(
     }
     return
   }
-)
+);
+
 const greyInThreads = () => allThreads.forEach(
   (thread) => {
     if (!find(selectedThreads, thread)) {
-      // console.log('greyin ' + thread)
       document.getElementById('btn-' + thread).classList.remove('disabled');
     }
     return
   }
-)
+);
 
 const toggleSelectThread = (number) => {
   //limit ammount of threads here
@@ -61,6 +62,7 @@ const toggleSelectThread = (number) => {
       checkIfReady();
       console.log('deselected ' + number)
       console.log('threads selected ' + selectedThreads)
+
     } else {
       document.getElementById("btn-" + number).classList.add('active');
       selectedThreads.push(number);
@@ -75,6 +77,7 @@ const toggleSelectThread = (number) => {
     }
   } else {
     greyOutThreads();
+
     if (find(selectedThreads, number)) {
       document.getElementById("btn-" + number).classList.remove('active');
       const index = selectedThreads.indexOf(number);
