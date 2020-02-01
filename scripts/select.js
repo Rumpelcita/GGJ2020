@@ -26,6 +26,15 @@ const next = () => {
   initializePaserGame();
 };
 
+const checkIfChecked = () => {
+  if(document.querySelector('input[name="colors"]:checked') === null) {
+    if(selectedThreads.length > 0) {
+      const color = selectedThreads[0].color;
+      document.getElementById('radio-' + color + '-input').checked = true;
+    }
+  }
+}
+
 const checkIfReady = () => {
   const button = document.getElementById('btn-continue');
 
@@ -79,6 +88,8 @@ const deselectThread = (colorCode) => {
   if (colorObj.ammount == 0) {
     document.getElementById("btn-" + colorCode + '-selected').classList.add('hidden');
     document.getElementById("radio-" + colorCode).classList.add('hidden');
+    document.getElementById('radio-' + color + '-input').checked = false;
+    checkIfChecked();
 
     const index = selectedThreads.indexOf(colorObj);
 
@@ -120,6 +131,8 @@ const selectThread = (colorCode) => {
     } else {
       document.getElementById("btn-" + colorCode + '-selected').classList.remove('hidden');
       document.getElementById("radio-" + colorCode).classList.remove('hidden');
+      checkIfChecked();
+
       colorObj.ammount = 1;
       document.getElementById("btn-" + colorCode + '-selected').innerHTML = colorObj.ammount;
 
