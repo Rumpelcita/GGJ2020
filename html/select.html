@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>GGJ2020</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- minify -->
+  <!-- minify -->
   <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
   <!-- latest -->
   <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
@@ -13,21 +14,87 @@
   <link href="https://unpkg.com/nes.css/css/nes-core.min.css" rel="stylesheet" />
 
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <link rel='stylesheet' type='text/css' media='screen' href='slider.css'>
 
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script>
   </script>
 </head>
+
 <body>
   <div class="main-game-container nes-container">
     <main class="select-screen">
       <header>
-          <span class="nes-text is-success home-title">Select a patch and color threads</span>
+        <span class="nes-text is-success home-title">Select a patch and color threads</span>
       </header>
       <section>
-        <button type="button" class="nes-btn is-primary">&lt;</button>
-        <div>patches</div>
-        <button type="button" class="nes-btn is-primary">></button>
+        <div class="wrapper">
+          <input checked type=radio name="slider" id="slide1" />
+          <input type=radio name="slider" id="slide2" />
+          <input type=radio name="slider" id="slide3" />
+          <input type=radio name="slider" id="slide4" />
+          <input type=radio name="slider" id="slide5" />
+
+          <div class="slider-wrapper">
+            <div class=inner>
+              <article>
+                <!-- <div class="info top-left">
+                <h3>Malacca</h3>
+              </div> -->
+                <img src="https://farm9.staticflickr.com/8059/28286750501_dcc27b1332_h_d.jpg" />
+              </article>
+
+              <article>
+                <!-- <div class="info bottom-right">
+                <h3>Cameron Highland</h3>
+              </div> -->
+                <img src="https://farm6.staticflickr.com/5812/23394215774_b76cd33a87_h_d.jpg" />
+              </article>
+
+              <article>
+                <!-- <div class="info bottom-left">
+                <h3>New Delhi</h3>
+              </div> -->
+                <img src="https://farm8.staticflickr.com/7455/27879053992_ef3f41c4a0_h_d.jpg" />
+              </article>
+
+              <article>
+                <!-- <div class="info top-right">
+                <h3>Ladakh</h3>
+              </div> -->
+                <img src="https://farm8.staticflickr.com/7367/27980898905_72d106e501_h_d.jpg" />
+              </article>
+
+              <article>
+                <!-- <div class="info bottom-left">
+                <h3>Nubra Valley</h3>
+              </div> -->
+                <img src="https://farm8.staticflickr.com/7356/27980899895_9b6c394fec_h_d.jpg" />
+              </article>
+            </div>
+            <!-- .inner -->
+          </div>
+          <!-- .slider-wrapper -->
+
+          <div class="slider-prev-next-control">
+            <label class="nes-btn is-primary" for=slide1></label>
+            <label class="nes-btn is-primary" for=slide2></label>
+            <label class="nes-btn is-primary" for=slide3></label>
+            <label class="nes-btn is-primary" for=slide4></label>
+            <label class="nes-btn is-primary" for=slide5></label>
+          </div>
+          <!-- .slider-prev-next-control -->
+
+          <!-- <div class="slider-dot-control">
+          <label for=slide1></label>
+          <label for=slide2></label>
+          <label for=slide3></label>
+          <label for=slide4></label>
+          <label for=slide5></label>
+        </div> -->
+          <!-- .slider-dot-control -->
+      </div>
+
       </section>
       <footer>
         <span>threads</span>
@@ -35,4 +102,5 @@
     </main>
   </div>
 </body>
+
 </html>
