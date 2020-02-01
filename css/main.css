@@ -153,6 +153,12 @@ body {
   display:none !important;
 }
 
+.invisible {
+  visibility: hidden !important;
+  pointer-events: none;
+  position: absolute !important;
+}
+
 #game-container {
   position: relative;
 }
@@ -162,3 +168,5 @@ body {
   bottom: 30px;
   right: 30px;
 }
+
+input[type="radio"] {}

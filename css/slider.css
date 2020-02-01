@@ -5,7 +5,7 @@
   position: relative;
 }
 
-input {
+.wrapper input {
   display: none;
 }
 
