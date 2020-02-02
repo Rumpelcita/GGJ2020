@@ -243,8 +243,10 @@ body {
 
 .color-picker {
   position: absolute;
-    left: 30px;
-    bottom: 30px;
+  left: 30px;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .done-btn {
@@ -262,4 +264,16 @@ body {
 
 .clothing-item:hover {
   opacity:1;
+}
+
+input[type="radio"] {
+  visibility: hidden;
+}
+
+input[type="radio"]+label {
+  opacity: 0.5;
+ }
+
+input[type="radio"]:checked+label {
+ opacity: 1;
 }
