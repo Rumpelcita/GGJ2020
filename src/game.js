@@ -116,8 +116,7 @@ function paint(pointer) {
     var color = game.create.palettes[palette][colorIndex];
 
     var amount = thread_size[colorIndex]; 
-    console.log('amount:');
-    console.log(thread_size);
+    console.log('amount:' + amount);
 
     var x1 = game.math.snapToCeil(pointer.x - canvasSprite.x, canvasZoom) / canvasZoom;
     var y1 = game.math.snapToCeil(pointer.y - canvasSprite.y, canvasZoom) / canvasZoom;
