@@ -203,7 +203,8 @@ const done = () => {
   shirtok.scale.setTo(3, 3);
   shirt.destroy();
   game.world.bringToTop(bmpText);
-  setTimeout(function(){ pic();}, 2500);
+  setTimeout(function(){ pic();}, 1500);
+  setTimeout(function(){ window.location.replace("index.html");}, 6500);
   console.log('finished');
 };
 
@@ -211,5 +212,4 @@ const pic = () => {
   game.canvas.toBlob(function(blob) {
     saveAs(blob, "your_dress.png");
   });
-  window.location.replace("index.html");
 };
