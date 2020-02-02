@@ -25,6 +25,7 @@ body {
   height: 768px;
   padding: 5px;
   overflow: hidden;
+  background-image: url('../assets/table_texture.png');
 }
 
 .main-menu {
