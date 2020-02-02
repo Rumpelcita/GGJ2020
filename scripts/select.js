@@ -193,3 +193,7 @@ const patchReady = () => {
 
   game.state.start('patching');
 }
+
+const killThread = (color) => {
+  document.getElementById("btn-" + color).classList.add('thread-dead');
+}
