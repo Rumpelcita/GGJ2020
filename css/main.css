@@ -4,6 +4,12 @@ body {
   align-content: center;
   font-family: 'Press Start 2P', cursive;
   text-align: center;
+  /* background-image: url('../assets/background.jpg'); */
+  background-repeat: repeat;
+}
+
+.logo {
+  width: 300px;
 }
 
 .creditos a {
