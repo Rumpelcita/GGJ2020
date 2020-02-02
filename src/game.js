@@ -182,7 +182,7 @@ function paint(pointer) {
         canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, color);
     } else {
         //if (amount > 0) {
-            data[y2][x2] = pmap[colorIndex];
+            data[y2][x2] = 'X';
             console.log('color')
             canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
             canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
