@@ -29,6 +29,8 @@ var data;
 var bitmapData;
 var bmpText;
 
+var shirt;
+
 // Threads
 var thread_size;
 

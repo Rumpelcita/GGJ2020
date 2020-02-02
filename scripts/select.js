@@ -201,9 +201,15 @@ const killThread = (color) => {
 const done = () => {
   shirtok = game.add.sprite(0, 0, 'tshirtok');
   shirtok.scale.setTo(3, 3);
+  shirt.destroy();
   game.world.bringToTop(bmpText);
+  setTimeout(function(){ pic();}, 2500);
+  console.log('finished');
+};
+
+const pic = () => {
   game.canvas.toBlob(function(blob) {
     saveAs(blob, "your_dress.png");
   });
-  console.log('finished');
+  window.location.replace("index.html");
 };
