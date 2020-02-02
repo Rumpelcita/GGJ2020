@@ -186,7 +186,7 @@ const patchReady = () => {
 
   console.log(x);
   document.getElementById("ready-btn").classList.add('hidden');
-
+  document.getElementById("done-btn").classList.remove('hidden');
   selectedThreads.forEach((arrayItem) => {
     document.getElementById("radio-" + arrayItem.color).classList.add('hidden');
   });
@@ -197,3 +197,7 @@ const patchReady = () => {
 const killThread = (color) => {
   document.getElementById("btn-" + color).classList.add('thread-dead');
 }
+
+const done = () => {
+  console.log('finished');
+};
