@@ -16,12 +16,23 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/slider.css'>
 
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+    @font-face {
+      font-family: 'ubuntu_monobold';
+      src: url('assets/fonts/ubuntumono-bold-webfont.woff2') format('woff2'),
+           url('assets/fonts/ubuntumono-bold-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+
+    }
+    </style>
     <script type="text/javascript" src="lib/phaser.min.js"></script>
     <script type="text/javascript" src="src/game.js"></script>
     <script type="text/javascript" src="scripts/select.js"> </script>
   </head>
 
   <body>
+    <div name='font-chat'style="font-family:ubuntu_monobold; position:absolute; left:-100000px"></div>
     <div id="main-container" class="main-game-container is-rounded nes-container">
       <main class="select-screen">
         <header>
