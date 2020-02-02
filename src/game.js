@@ -59,8 +59,8 @@ function createDrawingArea() {
     canvas = game.make.bitmapData(spriteWidth * canvasZoom, spriteHeight * canvasZoom);
 
     bg_patch = game.add.sprite(x+1, y+1, 'patch');
-    bg_patch.tint = 'rgba(239, 211, 0, 0.6)';
-    bg_patch.alpha = 0.2;
+    //bg_patch.tint = 'rgba(239, 211, 0, 0.6)';
+    bg_patch.alpha = 0.3;
 
     canvasSprite = canvas.addToWorld(x + 1, y + 1);
     canvasGrid = game.add.sprite(x + 1, y + 1, 'drawingGrid');
