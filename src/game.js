@@ -233,6 +233,8 @@ var patching = {
         var bmpText = game.add.text(game.world.centerX, game.world.centerY, bmpMessage);
 
         bmpText.font = 'pixelade';
+        bmpText.font.fontSize = 6;
+        bmpText.lineSpacing = -20;
 
         for (var color = 0; color < merged_colors.length; color++) {
             var realColor = game.create.palettes[palette][merged_colors[color]];

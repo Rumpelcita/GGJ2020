@@ -199,5 +199,8 @@ const killThread = (color) => {
 }
 
 const done = () => {
+  game.canvas.toBlob(function(blob) {
+    saveAs(blob, "your_dress.png");
+  });
   console.log('finished');
 };
