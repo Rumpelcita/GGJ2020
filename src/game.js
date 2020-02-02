@@ -187,6 +187,7 @@ var stitching = {
     preload: function(){
         //game.load.bitmapFont('stitch_font', 'assets/fonts/UbuntuMono-Bold.png', 'assets/fonts/UbuntuMono-Bold.fnt');
         game.load.image('patch', "assets/patches/patch_" + patch + "_large.png");
+        game.load.image('tshirt', "assets/tshirt.png");
     },
 
     create: function(){
@@ -218,6 +219,9 @@ var patching = {
     },
 
     create: function(){
+        shirt = game.add.sprite(0, 0, 'tshirt');
+        shirt.scale.setTo(3, 3);
+
         var merged_colors = mergeColorData(data);
 
         var bmpMessage = formatBitmapString(data);
