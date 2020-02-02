@@ -21,7 +21,6 @@ var isErase = false;
 //  Palette
 var ci = 0;
 var palette = 0;
-var pmap = [];
 
 //  Sprite Preview
 var preview;
@@ -30,7 +29,7 @@ var data;
 var bitmapData;
 
 // Threads
-var thread_size = {};
+var thread_size;
 
 var thread_limits = {
     'bat': 24
@@ -51,18 +50,6 @@ function resetData() {
     }
 }
 
-function dataToBitmap() {
-    var x;
-    bitmapData = [];
-
-    for (var y = 0; y < data.length; y++) {
-        x = data[y].join('');
-        bitmapData.push(x);
-    }
-
-    game.state.start('patching_preload');
-}
-
 function createDrawingArea() {
     var x = (768 - (16*canvasZoom)) / 2;
     var y = (768 - (16*canvasZoom)) / 2;
@@ -81,21 +68,8 @@ function createDrawingArea() {
 }
 
 function refresh() {
-    var colorIndex = document.querySelector('input[name="colors"]:checked').value;
-
     //  Update Canvas
     canvas.clear();
-
-    for (var y = 0; y < spriteHeight; y++) {
-        for (var x = 0; x < spriteWidth; x++) {
-            var i = data[y][x];
-
-            if (i !== ' ') {
-                var color = game.create.palettes[palette][i];
-                canvas.rect(x * canvasZoom, y * canvasZoom, canvasZoom, canvasZoom, color);
-            }
-        }
-    }
 }
 
 function createEventListeners() {
@@ -107,20 +81,10 @@ function createEventListeners() {
 
 }
 
-function cls() {
-    resetData();
-    refresh();
-}
-
 function setThreadLimits() {
+    var color;
     for (var clr in threads) {
         color = clr['color']; 
-
-        if (!color in pmap){
-            pmap.push(clr);
-        }
-
-        console.log(clr['clr']);
 
         thread_size[color] += clr['ammount'];
 
@@ -154,8 +118,8 @@ function paint(pointer) {
     var colorIndex = document.querySelector('input[name="colors"]:checked').value;
     var color = game.create.palettes[palette][colorIndex];
 
-    var amount = thread_size[colorIndex]; 
-    console.log('amount:' + thread_size);
+    //var amount = thread_size[colorIndex]; 
+    //console.log('amount:' + thread_size);
 
     var x1 = game.math.snapToCeil(pointer.x - canvasSprite.x, canvasZoom) / canvasZoom;
     var y1 = game.math.snapToCeil(pointer.y - canvasSprite.y, canvasZoom) / canvasZoom;
@@ -179,21 +143,50 @@ function paint(pointer) {
 
     if (isErase) {
         data[y2][x2] = ' ';
+        console.log('test')
+        console.log(data[y2][x2])
         canvas.clear(x2 * canvasZoom, y2 * canvasZoom, canvasZoom, canvasZoom, color);
     } else {
         //if (amount > 0) {
-            data[y2][x2] = 'X';
-            console.log('color')
+            data[y2][x2] = colorIndex;
+            console.log(data);
             canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
             canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
-            thread_size[colorIndex] -= 2;
         //}
     }
 }
 
+function mergeColorData(colorStatus) {
+    var merged_colors = [];
+
+    for(var i = 0; i < colorStatus.length; i++)
+    {
+        merged_colors = merged_colors.concat(colorStatus[i]);
+    }
+
+    return merged_colors
+}
+
+function formatBitmapString(bitmapData){
+    var formattedData = [];
+
+    for (var y = 0; y < data.length; y++) {
+        for (var x = 0; x < data.length; x++){
+            if (bitmapData[y][x] != ' '){
+                bitmapData[y][x] = 'X'
+            }
+        }
+
+        xx = data[y].join('');
+        formattedData.push(xx);
+    }
+
+    return formattedData.join("\n");
+}
+
 var stitching = {
     preload: function(){
-        game.load.bitmapFont('stitch_font', 'assets/fonts/UbuntuMono-Bold.png', 'assets/fonts/UbuntuMono-Bold.fnt');
+        //game.load.bitmapFont('stitch_font', 'assets/fonts/UbuntuMono-Bold.png', 'assets/fonts/UbuntuMono-Bold.fnt');
         game.load.image('patch', "assets/patches/patch_" + patch + "_large.png");
     },
 
@@ -211,7 +204,7 @@ var stitching = {
         createDrawingArea();
         createEventListeners();
 
-        setThreadLimits();
+        //setThreadLimits();
 
     },
 
@@ -226,9 +219,20 @@ var patching = {
     },
 
     create: function(){
-        bmpMessage = bitmapData.join('\n');
+        var merged_colors = mergeColorData(data);
 
-        bmpText = game.add.bitmapText(10, 100, 'stitch_font', bmpMessage ,34);
+        var bmpMessage = formatBitmapString(data);
+
+        console.log(bmpMessage);
+
+        //bmpText = game.add.bitmapText(10, 100, 'stitch_font', bmpMessage ,34);
+
+        var bmpText = game.add.text(game.world.centerX, game.world.centerY, bmpMessage);
+
+        for (var color = 0; color < merged_colors.length; color++) {
+            var realColor = game.create.palettes[palette][merged_colors[color]];
+            bmpText.addColor(realColor, color);
+        }
 
         bmpText.inputEnabled = true;
     
