@@ -243,4 +243,12 @@ body {
     left: 30px;
     bottom: 30px;
 }
-input[type="radio"] {}
+
+.done-btn {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
