@@ -54,7 +54,7 @@ const checkIfReady = () => {
 checkAmmounts = () => {
   let ammount = 0;
 
-  selectedThreads.forEach(function (arrayItem) {
+  selectedThreads.forEach((arrayItem) => {
     ammount = arrayItem.ammount + ammount;
   });
 
@@ -186,5 +186,14 @@ const patchReady = () => {
 
   console.log(x);
   document.getElementById("ready-btn").classList.add('hidden');
+
+  selectedThreads.forEach((arrayItem) => {
+    document.getElementById("radio-" + arrayItem.color).classList.add('hidden');
+  });
+
   game.state.start('patching');
+}
+
+const killThread = (color) => {
+  document.getElementById("btn-" + color).classList.add('thread-dead');
 }

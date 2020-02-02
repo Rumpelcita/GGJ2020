@@ -4,6 +4,12 @@ body {
   align-content: center;
   font-family: 'Press Start 2P', cursive;
   text-align: center;
+  /* background-image: url('../assets/background.jpg'); */
+  background-repeat: repeat;
+}
+
+.logo {
+  width: 300px;
 }
 
 .creditos a {
@@ -86,8 +92,71 @@ body {
   justify-content: space-around;
 }
 
-.thread {
+.btn-s {
+  font-size: 10px;
+  padding: 1px 2px;
   color: white;
+}
+.thread {
+  padding: 16px;
+  background-size: cover;
+  background-repeat:no-repeat;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.thread-dead {
+  background-image:url('../assets/threads/thread_dead.png') !important;
+}
+
+.thread-0 {
+  background-image:url('../assets/threads/thread_0.png');
+}
+.thread-1 {
+  background-image:url('../assets/threads/thread_1.png');
+}
+.thread-2 {
+  background-image:url('../assets/threads/thread_2.png');
+}
+.thread-3 {
+  background-image:url('../assets/threads/thread_3.png');
+}
+.thread-4 {
+  background-image:url('../assets/threads/thread_4.png');
+}
+.thread-5 {
+  background-image:url('../assets/threads/thread_5.png');
+}
+.thread-6 {
+  background-image:url('../assets/threads/thread_6.png');
+}
+.thread-7 {
+  background-image:url('../assets/threads/thread_7.png');
+}
+.thread-8 {
+  background-image:url('../assets/threads/thread_8.png');
+}
+.thread-9 {
+  background-image:url('../assets/threads/thread_9.png');
+}
+.thread-A {
+  background-image:url('../assets/threads/thread_A.png');
+}
+.thread-B {
+  background-image:url('../assets/threads/thread_B.png');
+}
+.thread-C {
+  background-image:url('../assets/threads/thread_C.png');
+}
+.thread-D {
+  background-image:url('../assets/threads/thread_D.png');
+}
+.thread-E {
+  background-image:url('../assets/threads/thread_E.png');
+}
+.thread-F {
+  background-image:url('../assets/threads/thread_F.png');
 }
 
 .btn-0 {
