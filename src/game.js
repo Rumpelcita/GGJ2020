@@ -122,7 +122,9 @@ function setThreadLimits() {
 
         console.log(clr['clr']);
 
-        thread_size[clr['color']] += clr['ammount'];
+        thread_size[color] += clr['ammount'];
+
+        console.log('thread_size:' + thread_size);
     }
 }
 
@@ -151,7 +153,6 @@ function onUp() {
 function paint(pointer) {
     var colorIndex = document.querySelector('input[name="colors"]:checked').value;
     var color = game.create.palettes[palette][colorIndex];
-    console.log(colorIndex);
 
     var amount = thread_size[colorIndex]; 
     console.log('amount:' + thread_size);
