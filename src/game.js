@@ -82,13 +82,10 @@ function createEventListeners() {
 }
 
 function setThreadLimits() {
-    var color;
-    for (var clr in threads) {
-        color = clr['color']; 
-
-        thread_size[color] += clr['ammount'];
-
-        console.log('thread_size:' + thread_size);
+    thread_size = {};
+    for (var i =0; i > threads.length; i++) {
+        console.log(threads[i]['color']);
+        thread_size[threads[i]['color']] = threads[i]['ammount'] * thread_limits[patch];
     }
 }
 
@@ -118,8 +115,9 @@ function paint(pointer) {
     var colorIndex = document.querySelector('input[name="colors"]:checked').value;
     var color = game.create.palettes[palette][colorIndex];
 
-    //var amount = thread_size[colorIndex]; 
-    //console.log('amount:' + thread_size);
+    var amount = thread_size[colorIndex]; 
+    console.log('amount:');
+    console.log(thread_size);
 
     var x1 = game.math.snapToCeil(pointer.x - canvasSprite.x, canvasZoom) / canvasZoom;
     var y1 = game.math.snapToCeil(pointer.y - canvasSprite.y, canvasZoom) / canvasZoom;
@@ -204,7 +202,7 @@ var stitching = {
         createDrawingArea();
         createEventListeners();
 
-        //setThreadLimits();
+        setThreadLimits();
 
     },
 
