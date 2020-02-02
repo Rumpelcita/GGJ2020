@@ -88,7 +88,7 @@ const deselectThread = (colorCode) => {
 
   if (colorObj.ammount == 0) {
     document.getElementById("btn-" + colorCode + '-selected').classList.add('hidden');
-    document.getElementById("radio-" + colorCode).classList.add('hidden');
+    document.getElementById("w-radio-" + colorCode).classList.add('hidden');
     document.getElementById('radio-' + color + '-input').checked = false;
     checkIfChecked();
 
@@ -131,7 +131,7 @@ const selectThread = (colorCode) => {
 
     } else {
       document.getElementById("btn-" + colorCode + '-selected').classList.remove('hidden');
-      document.getElementById("radio-" + colorCode).classList.remove('hidden');
+      document.getElementById("w-radio-" + colorCode).classList.remove('hidden');
       checkIfChecked();
 
       colorObj.ammount = 1;
@@ -188,7 +188,7 @@ const patchReady = () => {
   document.getElementById("ready-btn").classList.add('hidden');
   document.getElementById("done-btn").classList.remove('hidden');
   selectedThreads.forEach((arrayItem) => {
-    document.getElementById("radio-" + arrayItem.color).classList.add('hidden');
+    document.getElementById("w-radio-" + arrayItem.color).classList.add('hidden');
   });
 
   game.state.start('patching');
