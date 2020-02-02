@@ -8,6 +8,7 @@ body {
 
 .logo {
   width: 300px;
+  margin-top: 10px;
 }
 
 .creditos a {
@@ -43,7 +44,7 @@ body {
   border: 20px double whitesmoke;
 }
 
-.main-menu header, .select-screen header {
+.main-menu header, .select-screen header, .credits header {
   height: 30%;
   display: flex;
   align-items: flex-end;
@@ -56,6 +57,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction:column ;
+}
+.nav-item {
+  margin-bottom: 20px;
 }
 
 .main-menu footer {
@@ -276,4 +281,10 @@ input[type="radio"]+label {
 
 input[type="radio"]:checked+label {
  opacity: 1;
+}
+
+ nav.credits   {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly !important;
 }
