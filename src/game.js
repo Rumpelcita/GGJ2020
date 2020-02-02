@@ -204,6 +204,8 @@ var stitching = {
         Phaser.Canvas.setUserSelect(game.canvas, 'none');
         Phaser.Canvas.setTouchAction(game.canvas, 'none');
 
+        game.stage.backgroundColor = '#fff';
+
         resetData();
 
         createDrawingArea();
