@@ -173,7 +173,7 @@ function formatBitmapString(bitmapData){
     for (var y = 0; y < data.length; y++) {
         for (var x = 0; x < data.length; x++){
             if (bitmapData[y][x] != ' '){
-                bitmapData[y][x] = 'X'
+                bitmapData[y][x] = 'x'
             }
         }
 
