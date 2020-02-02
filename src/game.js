@@ -27,6 +27,7 @@ var preview;
 var previewBG;
 var data;
 var bitmapData;
+var bmpText;
 
 // Threads
 var thread_size;
@@ -188,6 +189,7 @@ var stitching = {
         //game.load.bitmapFont('stitch_font', 'assets/fonts/UbuntuMono-Bold.png', 'assets/fonts/UbuntuMono-Bold.fnt');
         game.load.image('patch', "assets/patches/patch_" + patch + "_large.png");
         game.load.image('tshirt', "assets/tshirt.png");
+        game.load.image('tshirtok', "assets/tshirtok.png");
     },
 
     create: function(){
@@ -230,7 +232,7 @@ var patching = {
 
         //bmpText = game.add.bitmapText(10, 100, 'stitch_font', bmpMessage ,34);
 
-        var bmpText = game.add.text(game.world.centerX, game.world.centerY, bmpMessage);
+        bmpText = game.add.text(game.world.centerX, game.world.centerY, bmpMessage);
 
         bmpText.font = 'pixelade';
         bmpText.font.fontSize = 6;
