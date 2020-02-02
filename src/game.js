@@ -183,6 +183,7 @@ function paint(pointer) {
     } else {
         //if (amount > 0) {
             data[y2][x2] = pmap[colorIndex];
+            console.log('color')
             canvas.line(x1 * canvasZoom, y1 * canvasZoom, x2 * canvasZoom, y2 * canvasZoom, color, 3);
             canvas.line(x2 * canvasZoom, y1 * canvasZoom, x1 * canvasZoom, y2 * canvasZoom, color, 3);
             thread_size[colorIndex] -= 2;
@@ -190,36 +191,9 @@ function paint(pointer) {
     }
 }
 
-var preload = {
-    preload: function(){
-
-    },
-
-    create: function(){
-
-    },
-
-    update: function(){
-            game.state.start('stitching');
-    }
-}
-
-var patching = {
-    preload: function(){
-
-    },
-
-    create: function(){
-
-    },
-
-    update: function(){
-
-    }
-}
-
 var stitching = {
     preload: function(){
+        game.load.bitmapFont('stitch_font', 'assets/fonts/UbuntuMono-Bold.png', 'assets/fonts/UbuntuMono-Bold.fnt');
         game.load.image('patch', "assets/patches/patch_" + patch + "_large.png");
     },
 
@@ -229,8 +203,6 @@ var stitching = {
 
         Phaser.Canvas.setUserSelect(game.canvas, 'none');
         Phaser.Canvas.setTouchAction(game.canvas, 'none');
-
-        game.stage.backgroundColor = '#ebf2f5';
 
         resetData();
 
@@ -246,30 +218,19 @@ var stitching = {
     }
 }
 
-var patching_preload = {
-    preload: function(){
-        game.create.texture(bitmapData, 'saved_patch');
-    },
-
-    create: function(){
-    },
-
-    update: function(){
-        console.log('loading...');
-        if (game.cache.checkImageKey('saved_patch')){
-            game.state.start('patching');
-        }
-
-    }
-}
-
 var patching = {
     preload: function(){
+        
     },
 
     create: function(){
-        console.log(bitmapData);
-        paletteArrow = game.add.sprite(8, 36, 'saved_patch');
+        bmpMessage = bitmapData.join('\n');
+
+        bmpText = game.add.bitmapText(10, 100, 'stitch_font', bmpMessage ,34);
+
+        bmpText.inputEnabled = true;
+    
+        bmpText.input.enableDrag();   
     },
 
     update: function(){
