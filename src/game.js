@@ -229,6 +229,8 @@ var patching = {
 
         var bmpText = game.add.text(game.world.centerX, game.world.centerY, bmpMessage);
 
+        bmpText.font = 'ubuntu_monobold';
+
         for (var color = 0; color < merged_colors.length; color++) {
             var realColor = game.create.palettes[palette][merged_colors[color]];
             bmpText.addColor(realColor, color);
