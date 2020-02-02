@@ -7,7 +7,6 @@ const parameters = () => { threads = selectedThreads; patch = selectedPatch };
 const startStitching = () => { game.state.start('stitching'); };
 
 game.state.add('stitching', stitching);
-game.state.add('patching_preload', patching_preload);
 game.state.add('patching', patching);
 game.state.add('parameters', { preload: parameters, update: startStitching });
 
@@ -187,5 +186,5 @@ const patchReady = () => {
 
   console.log(x);
   document.getElementById("ready-btn").classList.add('hidden');
-  game.state.start('patching_preload');
+  game.state.start('patching');
 }
