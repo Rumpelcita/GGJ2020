@@ -84,7 +84,7 @@ function createEventListeners() {
 function setThreadLimits() {
     var color;
     for (var clr in threads) {
-        color = clr['color']; 
+        color = clr['color'];
 
         thread_size[color] += clr['ammount'];
 
@@ -118,7 +118,7 @@ function paint(pointer) {
     var colorIndex = document.querySelector('input[name="colors"]:checked').value;
     var color = game.create.palettes[palette][colorIndex];
 
-    //var amount = thread_size[colorIndex]; 
+    //var amount = thread_size[colorIndex];
     //console.log('amount:' + thread_size);
 
     var x1 = game.math.snapToCeil(pointer.x - canvasSprite.x, canvasZoom) / canvasZoom;
@@ -215,7 +215,7 @@ var stitching = {
 
 var patching = {
     preload: function(){
-        
+
     },
 
     create: function(){
@@ -229,7 +229,7 @@ var patching = {
 
         var bmpText = game.add.text(game.world.centerX, game.world.centerY, bmpMessage);
 
-        bmpText.font = 'ubuntu_monobold';
+        bmpText.font = 'pixelade';
 
         for (var color = 0; color < merged_colors.length; color++) {
             var realColor = game.create.palettes[palette][merged_colors[color]];
@@ -237,8 +237,8 @@ var patching = {
         }
 
         bmpText.inputEnabled = true;
-    
-        bmpText.input.enableDrag();   
+
+        bmpText.input.enableDrag();
     },
 
     update: function(){
